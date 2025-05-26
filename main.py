@@ -50,10 +50,7 @@ def is_shorten_link(token, url):
 
 if __name__ == "__main__":
     load_dotenv()
-    try:
-        token = os.environ["VK_TOKEN"]  
-    except KeyError:
-        raise KeyError("VK_TOKEN не установлен")
+    token = os.environ["VK_TOKEN"]
 
     url = input("Введите ссылку для сокращения или подсчета кликов: ")
 
