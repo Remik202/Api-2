@@ -50,19 +50,19 @@ def is_shorten_link(token, url):
 
 if __name__ == "__main__":
     load_dotenv()
-    token = os.getenv("VK_TOKEN", default=None)
-
-    if token is None:
+    try:
+        token = os.environ["VK_TOKEN"]  
+    except KeyError:
         raise KeyError("VK_TOKEN не установлен")
-    else:
-        url = input("Введите ссылку для сокращения или подсчета кликов: ")
 
-        try:
-            if is_shorten_link(token, url):
-                clicks = count_clicks(token, url)
-                print("Переходы:", clicks)
-            else:
-                short_url = shorten_link(token, url)
-                print("Сокращенная ссылка:", short_url)
-        except requests.exceptions.RequestException as e:
-            print(f"Ошибка: {e}")
+    url = input("Введите ссылку для сокращения или подсчета кликов: ")
+
+    try:
+        if is_shorten_link(token, url):
+            clicks = count_clicks(token, url)
+            print("Переходы:", clicks)
+        else:
+            short_url = shorten_link(token, url)
+            print("Сокращенная ссылка:", short_url)
+    except requests.exceptions.RequestException as e:
+        print(f"Ошибка: {e}")
