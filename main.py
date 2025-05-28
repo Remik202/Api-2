@@ -52,7 +52,13 @@ if __name__ == "__main__":
     load_dotenv()
     token = os.environ["VK_TOKEN"]
 
-    url = input("Введите ссылку для сокращения или подсчета кликов: ")
+    parser = argparse.ArgumentParser(
+        description="Сократите URL-адрес или подсчитайте количество переходов по ссылке vk.cc"
+    )
+    parser.add_argument("url", help="URL-адрес для сокращения или подсчета переходов по нему.")
+    args = parser.parse_args()
+
+    url = args.url
 
     try:
         if is_shorten_link(token, url):
